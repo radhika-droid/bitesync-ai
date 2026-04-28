@@ -1,0 +1,21 @@
+food_name,calories,protein,carbs,fat,goal_type,diet_type
+Oats,150,5,27,3,weight_loss,veg
+Banana Shake,300,8,45,6,weight_gain,veg
+Salad,120,3,10,5,maintenance,veg
+Chicken Breast,220,35,0,5,weight_loss,non-veg
+Peanut Butter Sandwich,350,12,30,18,weight_gain,veg
+Grilled Salmon,250,30,0,12,weight_loss,non-veg
+Brown Rice Bowl,400,10,60,8,weight_gain,veg
+Greek Yogurt,100,15,6,0,maintenance,veg
+Egg White Omelette,180,25,2,8,weight_loss,non-veg
+Avocado Toast,320,6,30,20,weight_gain,veg
+Steamed Vegetables,90,4,15,1,maintenance,veg
+Turkey Sandwich,280,24,32,6,weight_loss,non-veg
+Protein Smoothie,400,30,50,8,weight_gain,veg
+Quinoa Salad,220,8,35,7,maintenance,veg
+Tuna Salad,200,28,5,8,weight_loss,non-veg
+Almonds & Dates,350,8,40,18,weight_gain,veg
+Soup & Bread,180,6,28,4,maintenance,veg
+Cottage Cheese,160,14,6,10,weight_loss,veg
+Pasta with Chicken,550,35,65,18,weight_gain,non-veg
+Fruit Bowl,110,1,25,0,maintenance,veg

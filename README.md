@@ -58,15 +58,24 @@ Open `http://localhost:5000` in browser.
 
 ```
 bitesync-ai/
-├── app.py                 # Flask app entrypoint
+├── app.py                           # Flask app entrypoint
 ├── requirements.txt
 ├── README.md
-├── TODO.md
+├── .gitignore
 │
-├── backend/               # Backend services
+├── backend/                         # Backend services
+│   ├── __init__.py
 │   ├── model/
+│   │   ├── __init__.py
 │   │   └── predict.py
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   └── api.py                   # API blueprint (/api/recommend)
+│   ├── services/
+│   │   ├── __init__.py
+│   │   └── recommendation_service.py
 │   └── utils/
+│       ├── __init__.py
 │       └── calorie_db.py
 │
 ├── frontend/
@@ -76,10 +85,10 @@ bitesync-ai/
 │       ├── css/styles.css
 │       └── js/script.js
 │
-├── data/                  # Datasets (add sample_food_dataset.csv)
-├── docs/
-│   └── project-overview.md
-└── .env.example
+├── data/
+│   └── sample_food_dataset.csv
+└── docs/
+    └── project-overview.md
 ```
 
 Note: The structure may evolve as new features are added.
@@ -115,12 +124,56 @@ python app.py
 ## 📊 Example Dataset (data/sample_food_dataset.csv)
 
 ```csv
-food_name,calories,protein,carbs,fat,goal_type
-Oats,150,5,27,3,weight_loss
-Banana Shake,300,8,45,6,weight_gain
-Salad,120,3,10,5,maintenance
-Chicken Breast,220,35,0,5,weight_loss
-Peanut Butter Sandwich,350,12,30,18,weight_gain
+food_name,calories,protein,carbs,fat,goal_type,diet_type
+Oats,150,5,27,3,weight_loss,veg
+Banana Shake,300,8,45,6,weight_gain,veg
+Salad,120,3,10,5,maintenance,veg
+Chicken Breast,220,35,0,5,weight_loss,non-veg
+Peanut Butter Sandwich,350,12,30,18,weight_gain,veg
+```
+
+> The full dataset contains 20 food items across all goals and diet types.
+
+## 🧪 API & Testing
+
+### Endpoint: `POST /api/recommend`
+
+Request body (JSON):
+
+```json
+{
+  "goal": "weight_loss",
+  "diet": "all",
+  "sort_by": "calories",
+  "top_n": 5
+}
+```
+
+| Field   | Type   | Required | Description                                    |
+| ------- | ------ | -------- | ---------------------------------------------- |
+| goal    | string | Yes      | `weight_loss`, `weight_gain`, or `maintenance` |
+| diet    | string | No       | `veg`, `non-veg`, or `all` (default)           |
+| sort_by | string | No       | Column name to sort by (e.g., `calories`)      |
+| top_n   | int    | No       | Max results to return (default: 5)             |
+
+### Example: cURL / PowerShell
+
+```bash
+curl -X POST http://localhost:5000/api/recommend \
+  -H "Content-Type: application/json" \
+  -d '{"goal":"weight_loss","diet":"veg","sort_by":"calories"}'
+```
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:5000/api/recommend" `
+  -Method POST -ContentType "application/json" `
+  -Body '{"goal":"weight_loss","diet":"veg"}'
+```
+
+### Health Check
+
+```bash
+curl http://localhost:5000/health
 ```
 
 ## 🎯 User Flow
